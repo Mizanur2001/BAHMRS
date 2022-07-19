@@ -235,11 +235,11 @@
               // Post request
                $marks_w = $_POST[$inp_name_w];
                $marks_p = $_POST[$inp_name_p];
-             
-               $sql="UPDATE `students` SET `$sub_name_w` = '$marks_w' WHERE `students`.`sl_no` = '$roll_no';";
+               //change hare in update version 0.1.1
+               $sql="UPDATE `students` SET `$sub_name_w` = '$marks_w' WHERE `students`.`roll_no` = '$roll_no';";
                $result = mysqli_query($connect,$sql); 
 
-               $sql="UPDATE `students` SET `$sub_name_p` = '$marks_p' WHERE `students`.`sl_no` = '$roll_no';";
+               $sql="UPDATE `students` SET `$sub_name_p` = '$marks_p' WHERE `students`.`roll_no` = '$roll_no';";
                $result = mysqli_query($connect,$sql); 
              
           }  

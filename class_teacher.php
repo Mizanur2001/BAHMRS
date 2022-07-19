@@ -23,7 +23,8 @@
       $E_name = $_POST["name"];
     
       // Sql query to be executed
-      $sql = "UPDATE `students` SET `name` = '$E_name' WHERE `students`.`sl_no` = $sno;";
+      //change hare in update version 0.1.1
+      $sql = "UPDATE `students` SET `name` = '$E_name' , `roll_no` = '$E_roll_no' WHERE `students`.`sl_no` = $sno;";
       $result = mysqli_query($connect, $sql);
         if($result){
         $update = true;
@@ -40,10 +41,11 @@
          $num =mysqli_num_rows($result); 
 
          $name=$_POST['name'];
+         $rollNo=$_POST['rollno'];
 
          //Insest data into data base 
-         $num=$num+1;
-         $sql="INSERT INTO `students` (`roll_no` ,`name`) VALUES ('$num' ,'$name');";
+         //  change hare in update version 0.1.1
+         $sql="INSERT INTO `students` (`roll_no` ,`name`) VALUES ('$rollNo' ,'$name');";
          $result = mysqli_query($connect,$sql); 
        }
 
@@ -97,19 +99,21 @@
      <?php require "partial/edit_modal_ct.php" ?>
 
     <div id="container">
-
-        <div id="input-box">
-            <h1 class="h-primary center">Roll No:-<?php echo $num+1;?></h1>
-            <div id="input">
-                <form action="class_teacher.php" method="post">
-                    <div class="form-group">
-                        <label for="Name">Student Name :) </label>
-                        <input type="text" id="name" name="name" placeholder="Enter Student name">
-                    </div>
-                    <button class="btn">Submit</button>
-                </form>
-            </div>
-        </div>
+      <!-- change hare in update version 0.1.1 -->
+      <div id="input-box">
+              <h1 class="h-primary center" style="margin-top:15px;">SL No:-<?php echo $num+1;?></h1>
+              <div id="input">
+                  <form action="class_teacher.php" method="post">
+                      <div class="form-group ct-form">
+                          <label for="rollno">Roll No :) </label>
+                          <input type="number" id="rollno" name="rollno" placeholder="Enter Student Roll No">
+                          <label for="Name">Student Name :) </label>
+                          <input type="text" id="name" name="name" placeholder="Enter Student name">
+                      </div>
+                      <button class="btn">Submit</button>
+                  </form>
+              </div>
+          </div>
 
         <div id="table">
             <table id="myTable">
@@ -120,9 +124,9 @@
                 </tr>
 
              <?php
-
                 //fatching data from data base
-                $sql_f="SELECT * from `students`";
+                // change hare in update version 0.1.1
+                $sql_f="SELECT * from `students` ORDER BY `sl_no` DESC";
                 $result = mysqli_query($connect,$sql_f);
                 while ($row=mysqli_fetch_assoc($result)) {
                 $roll_no=$row['roll_no'];
@@ -133,8 +137,7 @@
                       <td>'.$name.'</td>
                       <td><button class="t-btn edit" id='.$row['sl_no'].'>Edit</button></td>
                  </tr>';
-                }
-                
+                } 
              ?>
             </table>
         </div>
